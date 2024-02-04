@@ -40,4 +40,10 @@ public class MemberService {
         return memberRepository.findOne(memberId);
     }
 
+    @Transactional
+    public void update(Long id, String name) {
+        // 영속성 컨텍스트 안에서 엔티티를 조회하고, 데이터를 수정하면 트랜잭션 커밋 시점에 변경 감지(Dirty Checking)가 동작해서 데이터베이스에 수정 쿼리를 날린다.
+        Member member =memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
